@@ -1,10 +1,12 @@
 import java.util.Scanner;
 
 public class Person implements PersonInterface {
+    static private int idGenerator=1;
     private String email;
     private String password;
-    private String id;
+     private String id;
     private String name;
+    Person(int state){}
 Person()
 {
     Scanner sc=new Scanner(System.in);
@@ -14,10 +16,15 @@ Person()
     setName(sc.nextLine());
     System.out.println("Please Enter Password : ");
     setPassword(sc.nextLine());
-    System.out.println("Please Enter Id : ");
-    setId(sc.nextLine());
+    setId();
 
 
+}
+Person(String email,String password,String name){
+setEmail(email);
+setPassword(password);
+setName(name);
+setId();
 }
     @Override
     public String getEmail() {
@@ -41,8 +48,8 @@ Person()
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void setId() {
+        this.id = Integer.toString(idGenerator++);
     }
 
     @Override
@@ -52,9 +59,13 @@ Person()
 
     @Override
     public Boolean login(int state , String email, String password) {
+        System.out.println(state);
+        System.out.println(email+','+password);
+        //System.out.println(Adminstrator.adminstrators.containsKey(email));
+       // System.out.println(Adminstrator.adminstrators.get(email).getPassword().equals(password));
      if(state==1
              &&Adminstrator.adminstrators.containsKey(email)
-             &&Adminstrator.adminstrators.get(email).getPassword()==password)
+             &&Adminstrator.adminstrators.get(email).getPassword().equals(password))
      {
 
              return Boolean.TRUE;
@@ -62,13 +73,13 @@ Person()
      }
      else if(state ==2
      &&Adminstrator.instructors.containsKey(email)
-     &&Adminstrator.instructors.get(email).getPassword()==password)
+     &&Adminstrator.instructors.get(email).getPassword().equals(password))
      {
          return Boolean.TRUE;
      }
      else if(state ==3
              &&Adminstrator.students.containsKey(email)
-             &&Adminstrator.students.get(email).getPassword()==password)
+             &&Adminstrator.students.get(email).getPassword().equals(password))
      {
          return Boolean.TRUE;
      }

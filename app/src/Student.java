@@ -1,8 +1,34 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Vector;
 
 public class Student extends StudentInterface{
+
+    Student(String email,String password ,String name,String grade)
+    {
+
+        super(email,password,name);
+
+        setGrade(grade);
+
+    }
+    Student()
+    {
+        super();
+        System.out.println("Please Enter grade");
+        Scanner sc=new Scanner(System.in);
+        String grade=sc.nextLine();
+        setGrade(grade);
+
+
+    }
+    Student(int state)
+    {
+        super( state);
+    }
+
+
     // key is subject ,and value is map of task number and submission url
      public Map< String , Map< Integer , String> > tasksSubmitted=new HashMap<>();
      public Map< String , Map< Integer , String > > tasksFeedback=new HashMap<>();
@@ -12,7 +38,16 @@ private String grade;
         return grade;
     }
 
-    public void setGrade(String grade) {
+    private void setGrade(String grade) {
+        if( !Adminstrator.gradeStudents.containsKey(grade))
+        {
+            Adminstrator.gradeStudents.put(grade,new Vector<Student>() );
+        }
+
+
+            Adminstrator.gradeStudents.get(grade).add(this);
+
+
         this.grade = grade;
     }
 
@@ -34,7 +69,7 @@ private String grade;
     @Override
     public void submitProject(String subject, int projectNum,String ans) {
 
-        if(Adminstrator.tasks.containsKey(subject)&&Adminstrator.tasks.get(subject).contains(projectNum))
+        if(Adminstrator.tasks.containsKey(subject)&&Adminstrator.tasks.get(subject).containsKey(projectNum))
         {
          if(tasksSubmitted.containsKey(subject))
          {
@@ -54,6 +89,22 @@ private String grade;
         }
 
 
+    }
+    public void getTasks(){
+        Vector<String> subjects=Adminstrator.gradeSubject.get(getGrade());
+        for (String i:subjects)
+        {
+            Map<Integer,String> tasks=Adminstrator.tasks.get(i);
+
+            if(tasks.size()==0)
+                System.out.println("for subject "+i+" There is no tasks");
+            else
+            for(Map.Entry<Integer,String> entry: tasks.entrySet())
+
+            {
+                System.out.println("subject is "+i+" task number is "+entry.getKey()+ "  task is "+entry.getValue());
+            }
+        }
     }
 
     @Override

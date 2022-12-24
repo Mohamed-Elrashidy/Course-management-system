@@ -3,10 +3,21 @@ import java.util.Map;
 import java.util.Vector;
 
 public class Adminstrator extends AdminstratorInterface {
+    Adminstrator(String email, String password, String name) {
+        super(email,password,name);
+    }
+    Adminstrator()
+    {
+        super();
+    }
+    Adminstrator(int state)
+    {
+        super(state);
+    }
 
 // key is email and value is object of person
 static public Map<String,Adminstrator> adminstrators=new HashMap<>();
-static public Map<String,Insturctor> instructors=new HashMap<>();
+static public Map<String,Instructor> instructors=new HashMap<>();
 static public Map<String,Student> students=new HashMap<>();
 
 
@@ -19,9 +30,7 @@ static public Map<String, Vector<Student>> gradeStudents=new HashMap<>();
 
 
 // key is subject name and value is vector of tasks numbers
-static public Map<String,Vector<Integer>> tasks=new HashMap<>();
-
-
+static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
 
 
@@ -39,7 +48,7 @@ static public Map<String,Vector<Integer>> tasks=new HashMap<>();
         }
 
     }
-    public void createAccount(Insturctor insturctor) {
+    public void createAccount(Instructor insturctor) {
 
         if(instructors.containsKey(insturctor.getEmail()))
         {
@@ -69,24 +78,40 @@ static public Map<String,Vector<Integer>> tasks=new HashMap<>();
 
     @Override
     public void createCurriculum(String grade ,String subjectName,String subjectCode) {
-      if(gradeSubject.containsKey(grade))
-      {gradeSubject.get(grade).add(subjectName+','+subjectCode);
-          System.out.println("subject added successfully");
-      }
-      else
-      {Vector<String> subjects=new Vector<>();
-          subjects.add(subjectName+','+subjectCode);
-          gradeSubject.put(grade,subjects);
-          System.out.println("Grade is create and subject is added Successfully");
+        if(tasks.containsKey(subjectName+subjectCode))
+        {
+            System.out.println("Subject is already exist!!");
+        }
 
-      }
+        else{
+            Map<Integer, String> task = new HashMap<>();
+            tasks.put(subjectName + subjectCode, task);
+            System.out.println((tasks.get(subjectName+subjectCode).size()));
+            if (!gradeStudents.containsKey(grade))
+                gradeStudents.put(grade, new Vector<Student>());
+            if (gradeSubject.containsKey(grade)) {
+                if (gradeSubject.get(grade).contains(subjectName  + subjectCode)) {
+                    System.out.println("subject is already exist");
+                } else {
+                    gradeSubject.get(grade).add(subjectName  + subjectCode);
+                    System.out.println("subject added successfully");
+                }
+            } else {
+                Vector<String> subjects = new Vector<>();
+                subjects.add(subjectName + subjectCode);
+                gradeSubject.put(grade, subjects);
+                System.out.println("Grade is create and subject is added Successfully");
+
+            }
+        }
+
     }
 
     @Override
     public void assignClassses(String grade,String subject,String instructorEmail) {
         if(instructors.containsKey(instructorEmail))
         {
-            Insturctor insturctor=instructors.get(instructorEmail);
+            Instructor insturctor=instructors.get(instructorEmail);
             insturctor.classes.put(grade,subject);
             System.out.println("Grade is added succefully");
         }
@@ -96,4 +121,5 @@ static public Map<String,Vector<Integer>> tasks=new HashMap<>();
         }
 
     }
+
 }
