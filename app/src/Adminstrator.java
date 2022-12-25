@@ -39,7 +39,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
         if(adminstrators.containsKey(adminstrator.getEmail()))
         {
-            System.out.println("Sorry is administrator email is already exist");
+            System.out.println("Sorry  administrator email is already exist");
         }
         else
         {
@@ -52,7 +52,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
         if(instructors.containsKey(instructor.getEmail()))
         {
-            System.out.println("Sorry is instructor email is already exist");
+            System.out.println("Sorry instructor email is already exist");
         }
         else
         {
@@ -66,7 +66,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
         if(students.containsKey(student.getEmail()))
         {
-            System.out.println("Sorry is student email is already exist");
+            System.out.println("Sorry student email is already exist");
         }
         else
         {
