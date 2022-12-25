@@ -10,12 +10,13 @@ public class Instructor extends InstructorInterface{
     {
         super();
     }
+
     Instructor(int state){
         super(state);
     }
     @Override
-public void createTask(String grade ,int taskNumber,String task)
-{
+   public void createTask(String grade ,int taskNumber,String task)
+   {
     String subject =classes.get(grade);
     Map<Integer,String> tasks=Adminstrator.tasks.get(subject);
     if(tasks!=null&&tasks.containsKey(taskNumber))
@@ -62,13 +63,14 @@ public void createTask(String grade ,int taskNumber,String task)
         }
 
     }
+
     public void getClasses()
     {
         System.out.println("Your classes are : ");
 
         for (Map.Entry<String,String> entry : classes.entrySet()) {
 
-            System.out.println(entry.getKey());
+            System.out.println("class is : "+entry.getKey()+ ", subject is: "+entry.getValue());
 
         }
     }
@@ -77,6 +79,11 @@ public void createTask(String grade ,int taskNumber,String task)
     public void setFeedback(String feedback, int taskNumber,String studentEmail) {
 
     Student student = Adminstrator.students.get(studentEmail);
+    if(student==null)
+    {
+        System.out.println("No such student");
+    }
+    else{
     String subject = classes.get(student.getGrade());
     if(student.tasksFeedback.containsKey(subject))
     student.tasksFeedback.get(subject).put(taskNumber,feedback);
@@ -84,6 +91,12 @@ public void createTask(String grade ,int taskNumber,String task)
     else {Map<Integer,String> feed=new HashMap<>();
         feed.put(taskNumber,feedback);student.tasksFeedback.put(subject,feed);}
 
-        System.out.println("Feedback sent successfully");
+        System.out.println("Feedback sent successfully");}
+    }
+    @Override
+    public void viewData()
+    {
+        super.viewData();
+        getClasses();
     }
 }

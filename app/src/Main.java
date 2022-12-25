@@ -25,15 +25,16 @@ public class Main {
         new Adminstrator(1).createCurriculum("grade3","Math","m3");
         new Adminstrator(1).createCurriculum("grade3","OOD","o3");
         new Adminstrator(1).createCurriculum("grade3","operating system","o4");
-        new Adminstrator(1).assignClassses("grade1","Mathm1","Youssef@gmail.com");
-        new Adminstrator(1).assignClassses("grade2","databased2","Youssef@gmail.com");
-        new Adminstrator(1).assignClassses("grade3","operating systemo4","mohamed@gmail.com");
+        new Adminstrator(1).assignClassses("grade1","Math m1","Youssef@gmail.com");
+        new Adminstrator(1).assignClassses("grade2","database d2","Youssef@gmail.com");
+        new Adminstrator(1).assignClassses("grade3","operating system o4","mohamed@gmail.com");
 
             }
     public static void main(String[] args) {
       dataLoad();
 while(true)
 {
+    System.out.println("//////////////////////////////////////////////////////");
     System.out.println("If you are adminstrator press 1 : ");
     System.out.println("If you are instructor press 2 : ");
     System.out.println("If you are sutdent press 3 : ");
@@ -42,7 +43,7 @@ while(true)
     int state= sc.nextInt();
 
    if ( state == 1)
-   {
+   {sc.nextLine();
        Adminstrator currentUser;
        System.out.println("Please enter your email : ");
        System.out.println("Please enter your password : ");
@@ -57,13 +58,15 @@ while(true)
        }
        currentUser=Adminstrator.adminstrators.get(email);
        while(true)
-       {
+       {    System.out.println("//////////////////////////////////////////////////////");
+
            System.out.println("If you want to create adminstrator account  press 1 : ");
            System.out.println("If you want to create instructor account press 2 : ");
            System.out.println("If you want to create student account press 3 : ");
            System.out.println("If you want to add Curriculum to specific class press 4 : ");
            System.out.println("If you want to assign class to instructor press 5 : ");
-           System.out.println("If you want to exit  press 6");
+           System.out.println("If you want to get your data press 6 : ");
+           System.out.println("If you want to exit  press 7");
 
            state = sc.nextInt();
            //sc.nextLine();
@@ -103,6 +106,10 @@ while(true)
            }
            else if(state==6)
            {
+               currentUser.viewData();
+           }
+           else if(state==7)
+           {
                break;
            }
            else{
@@ -125,13 +132,14 @@ while(true)
        }
        Instructor currentUser=Adminstrator.instructors.get(email);
        while(true)
-       {
+       {    System.out.println("//////////////////////////////////////////////////////");
+
            System.out.println("If you want  get classes press 1 : ");
            System.out.println("If you want to you want to get sumbitted tasks  press 2 : ");
            System.out.println("If you want to send feedback press 3 : ");
            System.out.println("If you want to add task press 4 : ");
-
-           System.out.println("If you want to exit  press 5 : ");
+           System.out.println("If you want to get your data press 5 : ");
+           System.out.println("If you want to exit  press 6 : ");
 
            state=sc.nextInt();
          //  sc.nextLine();
@@ -174,6 +182,10 @@ while(true)
            }
            else if(state==5)
            {
+               currentUser.viewData();
+           }
+           else if(state==6)
+           {
              break;
 
            }
@@ -198,14 +210,14 @@ while(true)
        }
        Student currentUser= Adminstrator.students.get(email);
        while(true)
-       {
+       {    System.out.println("//////////////////////////////////////////////////////");
+
            System.out.println("If you want  to see your courses press 1 : ");
            System.out.println("If you want to submit tasks  press 2 : ");
            System.out.println("If you want to get feedback press 3 : ");
            System.out.println("If you want to see tasks press 4 : ");
-
-
-           System.out.println("If you want to exit  press 5 : ");
+           System.out.println("If you want to get your data press 5: ");
+           System.out.println("If you want to exit  press 6 : ");
            state=sc.nextInt();
           // sc.nextLine();
 
@@ -226,7 +238,7 @@ while(true)
 
                currentUser.submitProject(subject,taskNumber,ans);
            }
-           else if(state==3)
+           else if(state == 3)
            {sc.nextLine();
                System.out.println("Please enter subject");
                String subject=sc.nextLine();
@@ -242,6 +254,10 @@ while(true)
                currentUser.getTasks();
            }
            else if(state==5)
+           {
+               currentUser.viewData();
+           }
+           else if(state==6)
            {
                break;
 

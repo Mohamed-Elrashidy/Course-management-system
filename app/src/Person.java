@@ -21,10 +21,10 @@ Person()
 
 }
 Person(String email,String password,String name){
-setEmail(email);
-setPassword(password);
-setName(name);
-setId();
+   setEmail(email);
+   setPassword(password);
+   setName(name);
+   setId();
 }
     @Override
     public String getEmail() {
@@ -35,7 +35,7 @@ setId();
         this.email = email;
     }
 
-    public String getPassword() {
+    protected String getPassword() {
         return password;
     }
 
@@ -58,11 +58,9 @@ setId();
     }
 
     @Override
-    public Boolean login(int state , String email, String password) {
-        System.out.println(state);
-        System.out.println(email+','+password);
-        //System.out.println(Adminstrator.adminstrators.containsKey(email));
-       // System.out.println(Adminstrator.adminstrators.get(email).getPassword().equals(password));
+    public Boolean login(int state, String email, String password) {
+
+
      if(state==1
              &&Adminstrator.adminstrators.containsKey(email)
              &&Adminstrator.adminstrators.get(email).getPassword().equals(password))
@@ -89,6 +87,14 @@ setId();
          return Boolean.FALSE;
      }
 
+    }
+
+    @Override
+    public void viewData() {
+        System.out.println("Your Data : ");
+        System.out.println("name : " + getName());
+        System.out.println("id : " + getId());
+        System.out.println("email : "+ getEmail());
     }
 
     @Override

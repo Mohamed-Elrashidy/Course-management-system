@@ -54,17 +54,20 @@ public class Student extends StudentInterface{
     @Override
     public void viewCourses() {
         Vector<String> courses= Adminstrator.gradeSubject.get(grade);
+        if(courses.size()==0)
+            System.out.println("Courses not determined till now");
+        else{
         System.out.println("Your Courses are : ");
         for (String i:courses)
         {
             System.out.println(i+',');
-        }
+        }}
 
     }
 
     @Override
     public void submitProject(String subject, int projectNum,String ans) {
-
+        //check if subject has tasks and has task with the same projectNum
         if(Adminstrator.tasks.containsKey(subject)&&Adminstrator.tasks.get(subject).containsKey(projectNum))
         {
          if(tasksSubmitted.containsKey(subject))
@@ -77,11 +80,11 @@ public class Student extends StudentInterface{
              currentTask.put(projectNum,ans);
              tasksSubmitted.put(subject,currentTask);
          }
-            System.out.println("Submission succeful!!");
+            System.out.println("Submission successful");
         }
         else
         {
-            System.out.println("Task is not found , submmission failed");
+            System.out.println("Task is not found , submission failed");
         }
 
 
@@ -114,8 +117,15 @@ public class Student extends StudentInterface{
                 for(Map.Entry<Integer,String> entry: tasks.entrySet())
 
                 {
-                    System.out.println("subject is "+i+" task number is "+entry.getKey()+ "  task is "+entry.getValue());
+                    System.out.println("subject is "+i+", task number is "+entry.getKey()+ ",  task is "+entry.getValue());
                 }
         }
+    }
+    @Override
+    public void viewData()
+    {
+        super.viewData();
+        System.out.println("Your grade is : " +getGrade());
+        viewCourses();
     }
 }
