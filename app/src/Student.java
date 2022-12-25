@@ -7,12 +7,10 @@ public class Student extends StudentInterface{
 
     Student(String email,String password ,String name,String grade)
     {
-
         super(email,password,name);
-
         setGrade(grade);
-
     }
+
     Student()
     {
         super();
@@ -20,25 +18,25 @@ public class Student extends StudentInterface{
         Scanner sc=new Scanner(System.in);
         String grade=sc.nextLine();
         setGrade(grade);
-
-
     }
     Student(int state)
     {
         super( state);
     }
 
+    private String grade;
+
 
     // key is subject ,and value is map of task number and submission url
      public Map< String , Map< Integer , String> > tasksSubmitted=new HashMap<>();
      public Map< String , Map< Integer , String > > tasksFeedback=new HashMap<>();
-private String grade;
 
     public String getGrade() {
         return grade;
     }
 
-    private void setGrade(String grade) {
+    @Override
+    protected void setGrade(String grade) {
         if( !Adminstrator.gradeStudents.containsKey(grade))
         {
             Adminstrator.gradeStudents.put(grade,new Vector<Student>() );
@@ -51,9 +49,7 @@ private String grade;
         this.grade = grade;
     }
 
-
     // key is subject value is map it's key is task number and value string of assignment
-
 
     @Override
     public void viewCourses() {
@@ -90,22 +86,7 @@ private String grade;
 
 
     }
-    public void getTasks(){
-        Vector<String> subjects=Adminstrator.gradeSubject.get(getGrade());
-        for (String i:subjects)
-        {
-            Map<Integer,String> tasks=Adminstrator.tasks.get(i);
 
-            if(tasks.size()==0)
-                System.out.println("for subject "+i+" There is no tasks");
-            else
-            for(Map.Entry<Integer,String> entry: tasks.entrySet())
-
-            {
-                System.out.println("subject is "+i+" task number is "+entry.getKey()+ "  task is "+entry.getValue());
-            }
-        }
-    }
 
     @Override
     public void getFeedback(String subject, int projectNum) {
@@ -118,5 +99,23 @@ private String grade;
             System.out.println("No feedback exist.");
         }
 
+    }
+
+    @Override
+    public void getTasks(){
+        Vector<String> subjects=Adminstrator.gradeSubject.get(getGrade());
+        for (String i:subjects)
+        {
+            Map<Integer,String> tasks=Adminstrator.tasks.get(i);
+
+            if(tasks.size()==0)
+                System.out.println("for subject "+i+" There is no tasks");
+            else
+                for(Map.Entry<Integer,String> entry: tasks.entrySet())
+
+                {
+                    System.out.println("subject is "+i+" task number is "+entry.getKey()+ "  task is "+entry.getValue());
+                }
+        }
     }
 }
