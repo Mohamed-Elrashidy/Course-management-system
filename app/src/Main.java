@@ -1,6 +1,35 @@
 import java.util.Scanner;
 
 public class Main {
+    public static boolean login(int state, String email, String password) {
+        if(state==1
+                &&Adminstrator.adminstrators.containsKey(email)
+                &&Adminstrator.adminstrators.get(email).getPassword().equals(password))
+        {
+            return Boolean.TRUE;
+        }
+
+        else if(state ==2
+                &&Adminstrator.instructors.containsKey(email)
+                &&Adminstrator.instructors.get(email).getPassword().equals(password))
+        {
+            return Boolean.TRUE;
+        }
+
+        else if(state ==3
+                &&Adminstrator.students.containsKey(email)
+                &&Adminstrator.students.get(email).getPassword().equals(password))
+        {
+            return Boolean.TRUE;
+        }
+
+        else
+        {
+            return Boolean.FALSE;
+        }
+
+    }
+
     public static void dataLoad()
     {
        Adminstrator.adminstrators.put("mohamed.elrashidy354@gmail.com",
@@ -49,7 +78,7 @@ while(true)
        System.out.println("Please enter your password : ");
        String email=sc.nextLine();
        String password=sc.nextLine();
-       boolean flag=   new Person(state).login(state,email,password);
+       boolean flag=   login(state,email,password);
 
        if(!flag)
        {
@@ -67,7 +96,7 @@ while(true)
        sc.nextLine();
        String email=sc.nextLine();
        String password=sc.nextLine();
-       boolean flag=   new Person(state).login(state,email,password);
+       boolean flag=   login(state,email,password);
        if(!flag)
        {
            System.out.println("Invalid Email or password");
@@ -84,7 +113,7 @@ while(true)
        sc.nextLine();
        String email=sc.nextLine();
        String password=sc.nextLine();
-       boolean flag=   new Person(state).login(state,email,password);
+       boolean flag=   login(state,email,password);
        if(!flag)
        {
            System.out.println("Invalid Email or password");

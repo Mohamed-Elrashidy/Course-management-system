@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Student extends StudentInterface{
+public class Student extends Person{
 
     Student(String email,String password ,String name,String grade)
     {
@@ -27,12 +27,11 @@ public class Student extends StudentInterface{
      public Map< String , Map< Integer , String> > tasksSubmitted=new HashMap<>();
      public Map< String , Map< Integer , String > > tasksFeedback=new HashMap<>();
 
-    public String getGrade() {
+    protected String getGrade() {
         return grade;
     }
 
-    @Override
-    protected void setGrade(String grade) {
+    private void setGrade(String grade) {
         if( !Adminstrator.gradeStudents.containsKey(grade))
         {
             Adminstrator.gradeStudents.put(grade,new Vector<Student>() );
@@ -47,8 +46,7 @@ public class Student extends StudentInterface{
 
     // key is subject value is map it's key is task number and value string of assignment
 
-    @Override
-    protected void viewCourses() {
+    private void viewCourses() {
         Vector<String> courses= Adminstrator.gradeSubject.get(grade);
         if(courses.size()==0)
             System.out.println("Courses not determined till now");
@@ -61,8 +59,7 @@ public class Student extends StudentInterface{
 
     }
 
-    @Override
-    protected void submitProject(String subject, int projectNum,String ans) {
+    private void submitProject(String subject, int projectNum,String ans) {
         //check if subject has tasks and has task with the same projectNum
         if(Adminstrator.tasks.containsKey(subject)&&Adminstrator.tasks.get(subject).containsKey(projectNum))
         {
@@ -87,8 +84,8 @@ public class Student extends StudentInterface{
     }
 
 
-    @Override
-    protected void getFeedback(String subject, int projectNum) {
+
+    private void getFeedback(String subject, int projectNum) {
         if(tasksFeedback.containsKey(subject)&&tasksFeedback.get(subject).containsKey(projectNum))
         {
             System.out.println("Your Feedback is : ");
@@ -100,8 +97,7 @@ public class Student extends StudentInterface{
 
     }
 
-    @Override
-    protected void getTasks(){
+    private void getTasks(){
         Vector<String> subjects=Adminstrator.gradeSubject.get(getGrade());
         for (String i:subjects)
         {

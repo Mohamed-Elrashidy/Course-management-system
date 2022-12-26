@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Instructor extends InstructorInterface{
+public class Instructor extends Person{
  // key is grade ,value is vector of subject
    Map<String,String> classes=new HashMap();
     Instructor(String email, String password, String name) {
@@ -12,8 +12,8 @@ public class Instructor extends InstructorInterface{
     }
 
 
-    @Override
-   protected void createTask(String grade ,int taskNumber,String task)
+
+   private void createTask(String grade ,int taskNumber,String task)
    {
     String subject =classes.get(grade);
     Map<Integer,String> tasks=Adminstrator.tasks.get(subject);
@@ -25,8 +25,8 @@ public class Instructor extends InstructorInterface{
     }
 }
 
-    @Override
-    protected void submittedProjects(String grade) {
+
+    private void submittedProjects(String grade) {
         if(classes.containsKey(grade))
         {String subject =classes.get(grade);
             if(!Adminstrator.tasks.containsKey(subject))
@@ -61,8 +61,7 @@ public class Instructor extends InstructorInterface{
         }
 
     }
-@Override
-    protected void getClasses()
+    private void getClasses()
     {
         System.out.println("Your classes are : ");
 
@@ -73,8 +72,7 @@ public class Instructor extends InstructorInterface{
         }
     }
 
-    @Override
-    protected void setFeedback(String feedback, int taskNumber,String studentEmail) {
+    private void setFeedback(String feedback, int taskNumber,String studentEmail) {
 
     Student student = Adminstrator.students.get(studentEmail);
     if(student==null)
@@ -92,7 +90,7 @@ public class Instructor extends InstructorInterface{
         System.out.println("Feedback sent successfully");}
     }
     @Override
-    public void viewData()
+    protected void viewData()
     {
         super.viewData();
         getClasses();

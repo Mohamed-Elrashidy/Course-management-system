@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Person implements PersonInterface {
+abstract public class Person  {
     static private int idGenerator=1;
     private String email;
     private String password;
@@ -26,17 +26,15 @@ Person(String email,String password,String name){
    setName(name);
    setId();
 }
-    @Override
+
     public String getEmail() {
         return email;
     }
 
-    @Override
-    public void run() {
 
-    }
+  abstract  public void run() ;
 
-    public void setEmail(String email) {
+    private void setEmail(String email) {
         this.email = email;
     }
 
@@ -44,64 +42,30 @@ Person(String email,String password,String name){
         return password;
     }
 
-    public void setPassword(String password) {
+    private void setPassword(String password) {
         this.password = password;
     }
 
-    public String getId() {
+    private String getId() {
         return id;
     }
 
-    @Override
-    public void setId() {
+    private void setId() {
         this.id = Integer.toString(idGenerator++);
     }
 
-    @Override
-    public String getName() {
+    private String getName() {
         return name;
     }
 
-    @Override
-    public Boolean login(int state, String email, String password) {
-     if(state==1
-             &&Adminstrator.adminstrators.containsKey(email)
-             &&Adminstrator.adminstrators.get(email).getPassword().equals(password))
-     {
-             return Boolean.TRUE;
-     }
-
-     else if(state ==2
-     &&Adminstrator.instructors.containsKey(email)
-     &&Adminstrator.instructors.get(email).getPassword().equals(password))
-     {
-         return Boolean.TRUE;
-     }
-
-     else if(state ==3
-             &&Adminstrator.students.containsKey(email)
-             &&Adminstrator.students.get(email).getPassword().equals(password))
-     {
-         return Boolean.TRUE;
-     }
-
-     else
-     {
-         return Boolean.FALSE;
-     }
-
-    }
-
-    @Override
-    public void viewData() {
+    protected void viewData() {
         System.out.println("Your Data : ");
         System.out.println("name : " + getName());
         System.out.println("id : " + getId());
         System.out.println("email : "+ getEmail());
     }
 
-    @Override
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 }

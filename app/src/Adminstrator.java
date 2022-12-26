@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Adminstrator extends AdminstratorInterface {
+public class Adminstrator extends Person {
     Adminstrator(String email, String password, String name) {
         super(email,password,name);
     }
@@ -11,6 +11,7 @@ public class Adminstrator extends AdminstratorInterface {
     {
         super();
     }
+
     Adminstrator(int state)
     {
         super(state);
@@ -33,10 +34,7 @@ static public Map<String, Vector<Student>> gradeStudents=new HashMap<>();
 // key is subject name and value is vector of tasks numbers
 static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
-
-
-    @Override
-    protected void createAccount(Adminstrator adminstrator) {
+    private void createAccount(Adminstrator adminstrator) {
 
         if(adminstrators.containsKey(adminstrator.getEmail()))
         {
@@ -50,7 +48,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
     }
 
-    protected void createAccount(Instructor instructor) {
+    private void createAccount(Instructor instructor) {
 
         if(instructors.containsKey(instructor.getEmail()))
         {
@@ -64,7 +62,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
     }
 
-    protected void createAccount(Student student) {
+    private void createAccount(Student student) {
 
         if(students.containsKey(student.getEmail()))
         {
@@ -78,7 +76,6 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
     }
 
-    @Override
     protected void createCurriculum(String grade ,String subjectName,String subjectCode) {
         String newSubject=subjectName+" "+subjectCode;
         if(tasks.containsKey(newSubject))
@@ -109,7 +106,6 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
     }
 
-    @Override
     protected void assignClassses(String grade,String subject,String instructorEmail) {
         if(instructors.containsKey(instructorEmail))
         {
