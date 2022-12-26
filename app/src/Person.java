@@ -7,8 +7,7 @@ abstract public class Person  {
      private String id;
     private String name;
     Person(int state){}
-Person()
-{
+Person() {
     Scanner sc=new Scanner(System.in);
     System.out.println("Please Enter Email : ");
     setEmail(sc.nextLine());
@@ -58,7 +57,8 @@ Person(String email,String password,String name){
         return name;
     }
 
-    protected void viewData() {
+    protected void viewData()
+    {
         System.out.println("Your Data : ");
         System.out.println("name : " + getName());
         System.out.println("id : " + getId());

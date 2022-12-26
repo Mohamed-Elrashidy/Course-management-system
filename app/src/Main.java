@@ -121,7 +121,6 @@ while(true)
        }
        person = Adminstrator.students.get(email);
        person.run();
-
    }
    else if(state == 4)
    {
@@ -130,8 +129,6 @@ while(true)
    else {
        System.out.println("Invalid input");
    }
-
-
 }
     }
 }
