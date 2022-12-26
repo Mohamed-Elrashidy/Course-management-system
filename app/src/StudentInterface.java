@@ -7,16 +7,11 @@ abstract public class StudentInterface extends Person {
     {
         super();
     }
-    StudentInterface(int state)
-    {
-        super(state);
-    }
-
     abstract protected void setGrade(String grade);
-    abstract public void viewCourses();
-    abstract public void submitProject(String subject,int projectNum, String ans);
-    abstract public void getFeedback(String subject,int projectNum);
-    abstract public void getTasks();
+    abstract protected void viewCourses();
+    abstract protected void submitProject(String subject,int projectNum, String ans);
+    abstract protected void getFeedback(String subject,int projectNum);
+    abstract protected void getTasks();
 
 
 

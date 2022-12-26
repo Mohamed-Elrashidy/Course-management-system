@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Vector;
 
 public class Adminstrator extends AdminstratorInterface {
@@ -35,7 +36,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
 
     @Override
-    public void createAccount(Adminstrator adminstrator) {
+    protected void createAccount(Adminstrator adminstrator) {
 
         if(adminstrators.containsKey(adminstrator.getEmail()))
         {
@@ -48,7 +49,8 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
         }
 
     }
-    public void createAccount(Instructor instructor) {
+
+    protected void createAccount(Instructor instructor) {
 
         if(instructors.containsKey(instructor.getEmail()))
         {
@@ -62,7 +64,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
     }
 
-    public void createAccount(Student student) {
+    protected void createAccount(Student student) {
 
         if(students.containsKey(student.getEmail()))
         {
@@ -77,7 +79,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
     }
 
     @Override
-    public void createCurriculum(String grade ,String subjectName,String subjectCode) {
+    protected void createCurriculum(String grade ,String subjectName,String subjectCode) {
         String newSubject=subjectName+" "+subjectCode;
         if(tasks.containsKey(newSubject))
         {
@@ -108,7 +110,7 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
     }
 
     @Override
-    public void assignClassses(String grade,String subject,String instructorEmail) {
+    protected void assignClassses(String grade,String subject,String instructorEmail) {
         if(instructors.containsKey(instructorEmail))
         {
             Instructor instructor=instructors.get(instructorEmail);
@@ -122,4 +124,67 @@ static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
     }
 
+    @Override
+    public void run() {
+        Scanner sc= new Scanner(System.in);
+        while(true)
+        {    System.out.println("//////////////////////////////////////////////////////");
+
+            System.out.println("If you want to create adminstrator account  press 1 : ");
+            System.out.println("If you want to create instructor account press 2 : ");
+            System.out.println("If you want to create student account press 3 : ");
+            System.out.println("If you want to add Curriculum to specific class press 4 : ");
+            System.out.println("If you want to assign class to instructor press 5 : ");
+            System.out.println("If you want to get your data press 6 : ");
+            System.out.println("If you want to exit  press 7");
+
+            int state = sc.nextInt();
+            //sc.nextLine();
+
+            if(state == 1)
+            {sc.nextLine();
+                createAccount(new Adminstrator());
+            }
+            else if(state==2)
+            {sc.nextLine();
+                createAccount(new Instructor());
+            }
+            else if(state==3)
+            {sc.nextLine();
+                createAccount(new Student());
+            }
+            else if(state==4)
+            {sc.nextLine();
+                System.out.println("Please Enter grade : ");
+                String grade=sc.nextLine();
+                System.out.println("Please Enter subjectName: ");
+                String subjectname=sc.nextLine();
+                System.out.println("Please Enter subjectCode:  ");
+                String subjectCode=sc.nextLine();
+                createCurriculum(grade,subjectname,subjectCode);
+
+            }
+            else if(state == 5 )
+            {sc.nextLine();
+                System.out.println("Please Enter grade : ");
+                String grade=sc.nextLine();
+                System.out.println("Please Enter {\"subjectName\"\"subjectCode\" }}, : ");
+                String subjectname=sc.nextLine();
+                System.out.println("Please Enter instructor email:  ");
+                String instructorEmail=sc.nextLine();
+                assignClassses(grade,subjectname,instructorEmail);
+            }
+            else if(state==6)
+            {
+                viewData();
+            }
+            else if(state==7)
+            {
+                break;
+            }
+            else{
+                System.out.println("Invalid input");
+            }
+        }
+    }
 }

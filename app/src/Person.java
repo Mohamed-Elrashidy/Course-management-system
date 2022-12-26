@@ -31,6 +31,11 @@ Person(String email,String password,String name){
         return email;
     }
 
+    @Override
+    public void run() {
+
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
@@ -59,22 +64,20 @@ Person(String email,String password,String name){
 
     @Override
     public Boolean login(int state, String email, String password) {
-
-
      if(state==1
              &&Adminstrator.adminstrators.containsKey(email)
              &&Adminstrator.adminstrators.get(email).getPassword().equals(password))
      {
-
              return Boolean.TRUE;
-
      }
+
      else if(state ==2
      &&Adminstrator.instructors.containsKey(email)
      &&Adminstrator.instructors.get(email).getPassword().equals(password))
      {
          return Boolean.TRUE;
      }
+
      else if(state ==3
              &&Adminstrator.students.containsKey(email)
              &&Adminstrator.students.get(email).getPassword().equals(password))

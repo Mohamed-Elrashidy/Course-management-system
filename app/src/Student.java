@@ -19,13 +19,9 @@ public class Student extends StudentInterface{
         String grade=sc.nextLine();
         setGrade(grade);
     }
-    Student(int state)
-    {
-        super( state);
-    }
+
 
     private String grade;
-
 
     // key is subject ,and value is map of task number and submission url
      public Map< String , Map< Integer , String> > tasksSubmitted=new HashMap<>();
@@ -52,7 +48,7 @@ public class Student extends StudentInterface{
     // key is subject value is map it's key is task number and value string of assignment
 
     @Override
-    public void viewCourses() {
+    protected void viewCourses() {
         Vector<String> courses= Adminstrator.gradeSubject.get(grade);
         if(courses.size()==0)
             System.out.println("Courses not determined till now");
@@ -66,7 +62,7 @@ public class Student extends StudentInterface{
     }
 
     @Override
-    public void submitProject(String subject, int projectNum,String ans) {
+    protected void submitProject(String subject, int projectNum,String ans) {
         //check if subject has tasks and has task with the same projectNum
         if(Adminstrator.tasks.containsKey(subject)&&Adminstrator.tasks.get(subject).containsKey(projectNum))
         {
@@ -92,7 +88,7 @@ public class Student extends StudentInterface{
 
 
     @Override
-    public void getFeedback(String subject, int projectNum) {
+    protected void getFeedback(String subject, int projectNum) {
         if(tasksFeedback.containsKey(subject)&&tasksFeedback.get(subject).containsKey(projectNum))
         {
             System.out.println("Your Feedback is : ");
@@ -105,7 +101,7 @@ public class Student extends StudentInterface{
     }
 
     @Override
-    public void getTasks(){
+    protected void getTasks(){
         Vector<String> subjects=Adminstrator.gradeSubject.get(getGrade());
         for (String i:subjects)
         {
@@ -127,5 +123,71 @@ public class Student extends StudentInterface{
         super.viewData();
         System.out.println("Your grade is : " +getGrade());
         viewCourses();
+    }
+    @Override
+    public void run()
+    {
+            Scanner sc=new Scanner(System.in);
+
+            while(true)
+            {    System.out.println("//////////////////////////////////////////////////////");
+
+                System.out.println("If you want  to see your courses press 1 : ");
+                System.out.println("If you want to submit tasks  press 2 : ");
+                System.out.println("If you want to get feedback press 3 : ");
+                System.out.println("If you want to see tasks press 4 : ");
+                System.out.println("If you want to get your data press 5: ");
+                System.out.println("If you want to exit  press 6 : ");
+                int state=sc.nextInt();
+                // sc.nextLine();
+
+                if(state==1)
+                {
+                    viewCourses();
+                }
+                else if(state==2)
+                {sc.nextLine();
+                    System.out.println("Please enter subject name ");
+                    String subject=sc.nextLine();
+                    System.out.println("Please enter task number");
+                    int taskNumber = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Please Enter your answer");
+                    String ans =sc.nextLine();
+
+
+                    submitProject(subject,taskNumber,ans);
+                }
+                else if(state == 3)
+                {sc.nextLine();
+                    System.out.println("Please enter subject");
+                    String subject=sc.nextLine();
+                    System.out.println("Please enter task number");
+
+
+                    int taskNumber=sc.nextInt();
+
+                    getFeedback(subject,taskNumber);
+                }
+                else if(state==4)
+                {
+                    getTasks();
+                }
+                else if(state==5)
+                {
+                    viewData();
+                }
+                else if(state==6)
+                {
+                    break;
+
+                }
+
+                else{
+                    System.out.println("Invalid input");
+                }
+
+            }
+
     }
 }
