@@ -31,7 +31,7 @@ Person(String email,String password,String name){
     }
 
 
-  abstract  public void run() ;
+     abstract  public void run() ;
 
     private void setEmail(String email) {
         this.email = email;

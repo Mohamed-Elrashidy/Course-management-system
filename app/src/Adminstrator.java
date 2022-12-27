@@ -29,8 +29,6 @@ static public Map<String, Vector<String>> gradeSubject=new HashMap<>();
 // key is grade ,value list of students
 static public Map<String, Vector<Student>> gradeStudents=new HashMap<>();
 
-
-
 // key is subject name and value is vector of tasks numbers
 static public Map<String,Map<Integer,String>> tasks=new HashMap<>();
 
